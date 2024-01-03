@@ -4,16 +4,7 @@ https://github.com/kdheepak/kickstart.nvim/assets/1813121/f3ff9a2b-c31f-44df-a4f
 
 ### Introduction
 
-A starting point for Neovim that is:
-
-* Small
-* Single-file (with examples of moving to multi-file)
-* Documented
-* Modular
-
-This repo is meant to be used by **YOU** to begin your Neovim journey; remove the things you don't use and add what you miss.
-
-Kickstart.nvim targets *only* the latest ['stable'](https://github.com/neovim/neovim/releases/tag/stable) and latest ['nightly'](https://github.com/neovim/neovim/releases/tag/nightly) of Neovim. If you are experiencing issues, please make sure you have the latest versions.
+this is an custom confiration of neovim based on [kickstarter](https://github.com/nvim-lua/kickstart.nvim) in which i have added some plugins and changed many keybinds and added new ones 
 
 Distribution Alternatives:
 - [LazyVim](https://www.lazyvim.org/): A delightful distribution maintained by @folke (the author of lazy.nvim, the package manager used here)
@@ -71,6 +62,10 @@ nvim
   * Add new configuration in `lua/custom/plugins/*` files, which will be auto sourced using `lazy.nvim` (uncomment the line importing the `custom/plugins` directory in the `init.lua` file to enable this)
   * Modify `init.lua` with additional plugins.
   * Include the `lua/kickstart/plugins/*` files in your configuration.
+
+
+
+
 
 
 
