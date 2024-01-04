@@ -8,8 +8,6 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.scrolloff = 999
 
-vim.g.netrw_winsize = 15
-vim.g.netrw_banner = 0
 require('custom.keymaps')
 vim.api.nvim_set_option('winbar', '%f')
 --
@@ -82,6 +80,7 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
   "RRethy/vim-illuminate",
+  "simrat39/symbols-outline.nvim",
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -449,6 +448,7 @@ local function telescope_live_grep_open_files()
     prompt_title = 'Live Grep in Open Files',
   }
 end
+
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>m', require('telescope.builtin').marks, { desc = '[S]earch [M]arks' })
@@ -698,24 +698,11 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
+    { name = 'cody' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
   },
-}
-
-
-
-require 'netrw'.setup {
-  -- Put your configuration here, or leave the object empty to take the default
-  -- configuration.
-  icons = {
-    symlink = '', -- Symlink icon (directory and file)
-    directory = '', -- Directory icon
-    file = '', -- File icon
-  },
-  use_devicons = true, -- Uses nvim-web-devicons if true, otherwise use the file icon specified above
-  mappings = {}, -- Custom key mappings
 }
 
 require 'colorizer'.setup({
@@ -731,48 +718,83 @@ require 'colorizer'.setup({
   rgb_fn = { fg = '#rgb_fn', },     -- Highlight rgb(...) notation
   AARRGGBB = { fg = '#aarrgbb', },  -- AARRGGBB hex codes
 })
+require("nvim-tree").setup()
 
--- Lua
--- require('onedark').setup {
---   -- Main options --
---   style = 'dark',               -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
---   transparent = false,          -- Show/hide background
---   term_colors = true,           -- Change terminal color as per the selected theme style
---   ending_tildes = false,        -- Show the end-of-buffer tildes. By default they are hidden
---   cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
---
---   -- toggle theme style ---
---   toggle_style_key = "<leader>ts",                                                     -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
---   toggle_style_list = { 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' }, -- List of styles to toggle between
---
---   -- Change code style ---
---   -- Options are italic, bold, underline, none
---   -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
---   code_style = {
---     comments = 'italic',
---     keywords = 'none',
---     functions = 'bold',
---     strings = 'none',
---     variables = 'none'
---   },
---
---   -- Lualine options --
---   lualine = {
---     transparent = false, -- lualine center bar transparency
---   },
---
---   -- Custom Highlights --
---   colors = {},     -- Override default colors
---   highlights = {}, -- Override highlight groups
---
---   -- Plugins Config --
---   diagnostics = {
---     darker = false,     -- darker colors for diagnostic
---     undercurl = true,   -- use undercurl instead of underline for diagnostics
---     background = false, -- use background color for virtual text
---   },
--- }
--- -- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+-- OR setup with some options
+require("nvim-tree").setup({
+  sort = {
+    sorter = "case_sensitive",
+  },
+  view = {
+    width = 25,
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+require('symbols-outline').setup {
+  highlight_hovered_item = true,
+  width = 20, -- Adjust the width re
+  show_guides = true,
+  auto_preview = true,
+  relative_width = true,
+  show_symbol_details = true,
+  show_numbers = true,
+  position = 'right',
+  keymaps = { -- These keymaps can be a string or a table for multiple keys
+    close = { "<Esc>", "q" },
+    goto_location = "<Cr>",
+    focus_location = "o",
+    hover_symbol = "<C-space>",
+    toggle_preview = "K",
+    rename_symbol = "r",
+    code_actions = "a",
+    fold = "h",
+    unfold = "l",
+    fold_all = "W",
+    unfold_all = "E",
+    fold_reset = "R",
+  },
+  lsp_blacklist = {},
+  symbol_blacklist = {},
+  max_height = 20,
+  sort = false, symbols = {
+  File = { icon = "", hl = "@text.uri" },
+  Module = { icon = "", hl = "@namespace" },
+  Namespace = { icon = "", hl = "@namespace" },
+  Package = { icon = "", hl = "@namespace" },
+  Class = { icon = "", hl = "@type" },
+  Method = { icon = "ƒ", hl = "@method" },
+  Property = { icon = "", hl = "@method" },
+  Field = { icon = "", hl = "@field" },
+  Constructor = { icon = "󰒔", hl = "@constructor" },
+  Enum = { icon = "En", hl = "@type" },
+  Interface = { icon = "ﰮ ", hl = "@type" },
+  Function = { icon = "f()", hl = "@function" },
+  Variable = { icon = "󱗝", hl = "@constant" },
+  Constant = { icon = "󰅗", hl = "@constant" },
+  String = { icon = "", hl = "@string" },
+  Number = { icon = "#n", hl = "@number" },
+  Boolean = { icon = "0/1", hl = "@boolean" },
+  Array = { icon = "", hl = "@constant" },
+  Object = { icon = "￼", hl = "@type" },
+  Key = { icon = "🔐", hl = "@type" },
+  Null = { icon = " ", hl = "@type" },
+  EnumMember = { icon = "", hl = "@field" },
+  Struct = { icon = "", hl = "@type" },
+  Event = { icon = "🗲", hl = "@type" },
+  Operator = { icon = "", hl = "@operator" },
+  TypeParameter = { icon = "𝙏", hl = "@parameter" },
+  Component = { icon = "", hl = "@function" },
+  Fragment = { icon = "", hl = "@constant" },
+},
+}
 
+require("sg").setup {
+  enable_cody = true,
+  accept_tos = true,
+}
 --local lazy = require('lazy')
