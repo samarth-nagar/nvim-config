@@ -42,7 +42,7 @@ git clone https://github.com/samarth-nagar/nvim-config %userprofile%\AppData\Loc
 
 - on Windows (powershell)
 ```
-git clone https://github.com/samarth-nagar/nvim-confi $env:USERPROFILE\AppData\Local\nvim\ 
+git clone https://github.com/samarth-nagar/nvim-config $env:USERPROFILE\AppData\Local\nvim\ 
 ```
 
 
