@@ -15,5 +15,4 @@ vim.keymap.set("n", "<leadergd>", function() require("trouble").toggle("document
 vim.keymap.set("n", "<leader>gq", function() require("trouble").toggle("quickfix") end)
 vim.keymap.set("n", "<leader>gl", function() require("trouble").toggle("loclist") end)
 vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
-vim.api.nvim_set_keymap('n', '<leader>cc', ':CodyChat<Space>', { noremap = true })
 -- Lua
