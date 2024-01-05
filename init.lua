@@ -798,3 +798,18 @@ require("sg").setup {
   accept_tos = true,
 }
 --local lazy = require('lazy')
+require 'lspconfig'.tsserver.setup {
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = true
+    require 'formatter'.setup({
+      filetype = 'javascript',
+      function()
+        return {
+          exe = "prettier",
+          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(bufnr), '--stdin' },
+          stdin = true
+        }
+      end
+    })
+  end
+}
