@@ -698,10 +698,11 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
-    { name = 'cody' },
+    -- { name = 'cody' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
+    { name = 'codeium' },
   },
 }
 
