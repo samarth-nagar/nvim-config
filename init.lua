@@ -7,7 +7,6 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.scrolloff = 999
-
 require('custom.keymaps')
 vim.api.nvim_set_option('winbar', '%f')
 
@@ -616,11 +615,12 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  glint = { 'cjs' },
 
   lua_ls = {
     Lua = {
-      workspace = { checkThirdParty = true },
-      telemetry = { enable = true },
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
       -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
       -- diagnostics = { disable = { 'missing-fields' } },
     },
