@@ -735,10 +735,6 @@ require("nvim-tree").setup({
   },
 })
 
-require("sg").setup {
-  enable_cody = true,
-  accept_tos = true,
-}
 --local lazy = require('lazy')
 require 'lspconfig'.tsserver.setup {
   on_attach = function(client, bufnr)

@@ -7,15 +7,7 @@ return {
     {
         "prichrd/netrw.nvim"
     },
-    { 'akinsho/toggleterm.nvim', version = "*", config = true }
-    , {
-    "jay-babu/mason-null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-        "williamboman/mason.nvim",
-        "jose-elias-alvarez/null-ls.nvim"
-    },
-},
+    { 'akinsho/toggleterm.nvim', version = "*", config = true },
     "norcalli/nvim-colorizer.lua",
     "SmiteshP/nvim-navic",
     "rcarriga/nvim-notify",
